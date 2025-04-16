@@ -1,4 +1,4 @@
-import javax.swing.JOptionPane;
+import java.util.Scanner;
 
 class BMICalculator {
     private double height;
@@ -28,17 +28,24 @@ class BMICalculator {
 
 public class Main {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
         try {
-            double height = Double.parseDouble(JOptionPane.showInputDialog("Enter your height in meters:"));
-            double weight = Double.parseDouble(JOptionPane.showInputDialog("Enter your weight in kilograms:"));
+            System.out.print("Enter your height in meters: ");
+            double height = Double.parseDouble(scanner.nextLine());
+
+            System.out.print("Enter your weight in kilograms: ");
+            double weight = Double.parseDouble(scanner.nextLine());
 
             BMICalculator bmiCalc = new BMICalculator(height, weight);
             double bmi = bmiCalc.calculateBMI();
             String advice = bmiCalc.getHealthAdvice(bmi);
 
-            JOptionPane.showMessageDialog(null, String.format("Your BMI is: %.2f\n%s", bmi, advice));
+            System.out.printf("Your BMI is: %.2f\n%s\n", bmi, advice);
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Invalid input. Please enter numbers only.");
+            System.out.println("Invalid input. Please enter numbers only.");
+        } finally {
+            scanner.close();
         }
     }
 }

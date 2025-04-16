@@ -24,6 +24,10 @@ class BMICalculator {
             return "You are obese. It's important to consult a healthcare professional.";
         }
     }
+
+    public static boolean isValidInput(double height, double weight) {
+        return height > 0 && weight > 0;
+    }
 }
 
 public class Main {
@@ -31,6 +35,11 @@ public class Main {
         try {
             double height = Double.parseDouble(JOptionPane.showInputDialog("Enter your height in meters:"));
             double weight = Double.parseDouble(JOptionPane.showInputDialog("Enter your weight in kilograms:"));
+
+            if (!BMICalculator.isValidInput(height, weight)) {
+                JOptionPane.showMessageDialog(null, "Height and weight must be positive numbers.");
+                return;
+            }
 
             BMICalculator bmiCalc = new BMICalculator(height, weight);
             double bmi = bmiCalc.calculateBMI();
